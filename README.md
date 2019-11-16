@@ -5,9 +5,10 @@ This repository contains all the assignments from `188.429 Business Intelligence
 Each assignment has it's corresponding folder and all the relevant data should be self-contained in those folders.
 
 ## Group 44 members:
+
 * Pinterits Jakob
-*	Rexha Gent
-*	Wimmer Christoph 
+* Rexha Gent
+* Wimmer Christoph 
 
 ## Tasks
 - [ ] Due 01.12.2019 23:55	Hands-on 1 (TUWEL upload)
