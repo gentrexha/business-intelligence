@@ -1,6 +1,6 @@
 # 188.429 Business Intelligence
 
-This repository contains all the assignments from `194.049 Energy-efficient Distributed Systems` at the TU Wien during 2019W semester.
+This repository contains all the assignments from `188.429 Business Intelligence` at the TU Wien during 2019W semester.
 
 Each assignment has it's corresponding folder and all the relevant data should be self-contained in those folders.
 
