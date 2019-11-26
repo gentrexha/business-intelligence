@@ -1,13 +1,13 @@
 CREATE TABLE `TB_Customer` (
 	`CustomerID` INT NOT NULL,
-	`Title` VARCHAR,
-	`FirstName` VARCHAR NOT NULL,
-	`MiddleName` VARCHAR,
-	`LastName` VARCHAR NOT NULL,
-	`EmailAddress` VARCHAR,
+	`Title` TEXT,
+	`FirstName` TEXT NOT NULL,
+	`MiddleName` TEXT,
+	`LastName` TEXT NOT NULL,
+	`EmailAddress` TEXT,
 	`Phone` INT,
-	`Suffix` VARCHAR,
-	`Gender` VARCHAR NOT NULL,
+	`Suffix` TEXT,
+	`Gender` TEXT NOT NULL,
 	`Birthdate` DATE NOT NULL,
 	CONSTRAINT PK_Customer PRIMARY KEY (`CustomerID`)
 );
