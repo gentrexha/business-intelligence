@@ -1,0 +1,89 @@
+---
+title: "188.429 Business Intelligence"
+subtitle: "Assignment 1: Data Platforms; Part A: Data Warehousing Basics and Modeling"
+author: "Jakob Pinterits (), Gent Rexha (11832486) & Christoph Wimmer ()"
+date: "24 11 2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1.Intro [2 points]
+
+Describe the organization and its mission in three sentences or less.
+
+## 2. OLTP [12 points]
+
+Enumerate 3 operational systems used by the organization to run its daily business.
+For each of these operational (OLTP) systems:
+
+a) Describe the operations that it performs (bullet point list).
+b) Characterize the data that the system stores (bullet point list).
+c) List 5 typical questions that can be answered using that data.
+d) List 5 strategically important questions that cannot be answered based (only) on
+the data that this system holds.
+
+## 3. Data Warehouse [12 points]
+
+Assume that you have been tasked with developing a Data Warehouse for the organization.
+The management team has instructed you that this DWH should become a central “analytics
+hub” for the organization and that it should support them in their strategic decisions. To
+prepare planning its development, you are tasked with creating a concept for a DWH project
+by addressing the following questions.
+
+a) Provide 5 examples for important strategic questions that will be answered
+using the data in the DWH.
+b) Define 5 key subject areas. Then pick one of these areas and describe the data
+that will be stored on it in the DWH. List the source systems that will provide the
+various pieces of data on the subject area.
+c) Propose an architecture and development approach for the DWH project.2
+Motivate your choice and highlight the advantages and drawbacks of your
+proposal.
+d) List 5 potential challenges that you foresee in the development process (e.g.,
+with respect to data governance, data quality, ETL procedures, value delivery
+etc.).
+
+## 4. Data Mart [12 points]
+
+Choose one of the subject areas you identified in step 2 and design a dimensional (i.e.,
+Star or Snowflake) schema for a Data Mart that will cover the subject area. Make sure to
+include appropriate facts and choose a set of dimensions that facilitates meaningful
+queries.
+
+1 I.e., any organization with a large enough operational systems infrastructure and therefore a need for a DWH.
+2 Architecture: e.g., Kimball’s data warehouse bus, Inmon’s Corporate Information Factory, Virtual Data Warehouse,
+HTAP etc.
+Development approach: e.g., Kimball, Inmon, Agile…
+188.429 Business Intelligence (VU 4,0)
+2019W
+Assignment 1: Data Platforms
+4 of 19
+
+## 5. Data Lake [12 Points]
+
+The management team of the organization has heard about recent technological
+developments and approached you with a few questions about data lakes.
+Specifically, the management team wants to know:
+
+a) Whether (or not) a data lake would be a cost-effective alternative to the data
+warehouse solution you proposed.
+b) What use cases (business questions or entirely new business opportunities) a
+data lake could address that the proposed DWH cannot handle and what
+benefits you foresee.
+c) How a data lake would fit into your proposed architecture.
+d) Whether the introduction of a data lake would require any organizational
+changes.
+
+## Expected results:
+
+• Report on each of these questions in your solution document.
+• Be concise and answer succinctly (bullet point lists will typically be sufficient)!
+• Include figures where appropriate (architecture, schema of your data mart design etc.)
+Deliverables:
+• A PDF document describing your solution. Page limit: max. 4 pages total, including figures;
+ACM two-column proceedings template (sigconf option under LaTeX).
+Link: https://www.acm.org/publications/proceedings-template
+• Note that using a wrong document format or exceeding the page limit will incur a penalty
+of 10 Points!
