@@ -5,7 +5,7 @@ CREATE TABLE `TB_Customer` (
 	`MiddleName` TEXT,
 	`LastName` TEXT NOT NULL,
 	`EmailAddress` TEXT,
-	`Phone` INT,
+	`Phone` TEXT,
 	`Suffix` TEXT,
 	`Gender` TEXT NOT NULL,
 	`Birthdate` DATE NOT NULL,
