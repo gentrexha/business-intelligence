@@ -4,9 +4,9 @@ CREATE TABLE `TB_Customer` (
 	`FirstName` TEXT NOT NULL,
 	`MiddleName` TEXT,
 	`LastName` TEXT NOT NULL,
+	`Suffix` TEXT,
 	`EmailAddress` TEXT,
 	`Phone` TEXT,
-	`Suffix` TEXT,
 	`Gender` TEXT NOT NULL,
 	`Birthdate` DATE NOT NULL,
 	CONSTRAINT PK_Customer PRIMARY KEY (`CustomerID`)
