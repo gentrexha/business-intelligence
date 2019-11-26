@@ -12,27 +12,16 @@ mysql -u root
 create user 'admin'@'localhost' identified by '<your_password>';
 ```
 
+## Task 1
+
 ```sql
 CREATE DATABASE BI_OLTP_44;
 GRANT ALL PRIVILEGES ON BI_OLTP_44.* TO 'admin'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
-## Ordering of creation
+## Task 2
 
-All tables without FK references first:
-
-* TB_Customer
-* TB_Address
-* TB_ShipMethod
-* TB_ProductCategory
-
-Now you can create:
-
-* TB_SalesOrderHeader
-* TB_CustomerAddress
-* TB_Product
-
-After that you can also create:
-
-* TB_SalesOrderDetail
+```sql
+CREATE DATABASE BI_OLAP_44;
+```
