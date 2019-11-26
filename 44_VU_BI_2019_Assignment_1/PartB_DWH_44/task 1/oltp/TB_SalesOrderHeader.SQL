@@ -10,8 +10,8 @@ CREATE TABLE `TB_SalesOrderHeader` (
 	`BillToAddressID` INT NOT NULL,
 	`ShipMethodID` INT NOT NULL,
 	CONSTRAINT PK_SalesOrderHeader PRIMARY KEY (`SalesOrderID`),
-	CONSTRAINT FK_ShipToAddressID_Address FOREIGN KEY (ShipToAddressID) REFERENCES TB_Address(AddressID),
-    CONSTRAINT FK_CustomerID_Customer FOREIGN KEY (CustomerID) REFERENCES TB_Customer(CustomerID),
-    CONSTRAINT FK_BillToAddressID_Address FOREIGN KEY (BillToAddressID) REFERENCES TB_Address(AddressID),
-    CONSTRAINT FK_ShipMethodID_ShipMethod FOREIGN KEY (ShipMethodID) REFERENCES TB_ShipMethod(ShipMethodID)
+	CONSTRAINT FK_ShipToAddressID_SalesOrderHeader FOREIGN KEY (ShipToAddressID) REFERENCES TB_Address(AddressID),
+    CONSTRAINT FK_CustomerID_SalesOrderHeader FOREIGN KEY (CustomerID) REFERENCES TB_Customer(CustomerID),
+    CONSTRAINT FK_BillToAddressID_SalesOrderHeader FOREIGN KEY (BillToAddressID) REFERENCES TB_Address(AddressID),
+    CONSTRAINT FK_ShipMethodID_SalesOrderHeader FOREIGN KEY (ShipMethodID) REFERENCES TB_ShipMethod(ShipMethodID)
 );
