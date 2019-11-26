@@ -6,7 +6,5 @@ CREATE TABLE `TB_SalesOrderDetail` (
 	`UnitPrice` DECIMAL NOT NULL,
 	CONSTRAINT PK_SalesOrderDetail PRIMARY KEY (`SalesOrderID`,`SalesOrderDetailID`),
 	CONSTRAINT FK_SalesOrderID_SalesOrderDetail FOREIGN KEY (SalesOrderID) REFERENCES TB_SalesOrderHeader(SalesOrderID),
-    CONSTRAINT FK_OrderQty_SalesOrderDetail FOREIGN KEY (OrderQty) REFERENCES TB_Product(ProductID),
-    CONSTRAINT FK_ProductID_SalesOrderDetail FOREIGN KEY (ProductID) REFERENCES TB_Product(ProductID),
-    CONSTRAINT FK_UnitPrice_SalesOrderDetail FOREIGN KEY (UnitPrice) REFERENCES TB_Product(ProductID)
+    CONSTRAINT FK_ProductID_SalesOrderDetail FOREIGN KEY (ProductID) REFERENCES TB_Product(ProductID)
 );
