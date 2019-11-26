@@ -3,7 +3,7 @@ CREATE TABLE `TB_SalesOrderDetail` (
 	`SalesOrderDetailID` INT NOT NULL,
 	`OrderQty` INT NOT NULL,
 	`ProductID` INT NOT NULL,
-	`UnitPrice` INT NOT NULL,
+	`UnitPrice` DECIMAL NOT NULL,
 	CONSTRAINT PK_SalesOrderDetail PRIMARY KEY (`SalesOrderID`,`SalesOrderDetailID`),
 	CONSTRAINT FK_SalesOrderID_SalesOrderDetail FOREIGN KEY (SalesOrderID) REFERENCES TB_SalesOrderHeader(SalesOrderID),
     CONSTRAINT FK_OrderQty_SalesOrderDetail FOREIGN KEY (OrderQty) REFERENCES TB_Product(ProductID),

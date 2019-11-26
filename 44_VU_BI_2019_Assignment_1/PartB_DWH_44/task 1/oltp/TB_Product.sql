@@ -1,7 +1,7 @@
 CREATE TABLE `TB_Product` (
 	`ProductID` INT,
 	`Name` TEXT NOT NULL,
-	`ProductNumber` INT NOT NULL,
+	`ProductNumber` TEXT NOT NULL,
 	`StandardCost` DECIMAL NOT NULL,
 	`ListPrice` DECIMAL NOT NULL,
 	`Size` DECIMAL,
