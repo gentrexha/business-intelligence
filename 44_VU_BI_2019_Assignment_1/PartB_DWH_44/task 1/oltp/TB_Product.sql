@@ -12,6 +12,5 @@ CREATE TABLE `TB_Product` (
 	`SellEndDate` DATE,
 	`DiscontinuedDate` DATE,
 	CONSTRAINT PK_Product PRIMARY KEY (`ProductID`),
-	CONSTRAINT FK_ProductCategoryID_ProductCategory FOREIGN KEY (`ProductCategoryID`)
-	REFERENCES TB_ProductCategory(`ProductCategoryID`)
+	CONSTRAINT FK_ProductCategoryID_Product FOREIGN KEY (`ProductCategoryID`) REFERENCES TB_ProductCategory(`ProductCategoryID`)
 );
