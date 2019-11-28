@@ -13,8 +13,8 @@ p.DiscontinuedDate,
 p.Size,
 p.Weight,
 IF(p.ProductCategoryID = 16 OR p.ProductCategoryID = 18 OR p.ProductCategoryID = 20, 1, 0) AS IsBulkyItem
-FROM TB_Product p
-LEFT JOIN TB_ProductCategory pc
+FROM BI_OLTP_44.TB_Product p
+LEFT JOIN BI_OLTP_44.TB_ProductCategory pc
 ON p.ProductCategoryID = pc.ProductCategoryID
-LEFT JOIN TB_ProductCategory ppc
+LEFT JOIN BI_OLTP_44.TB_ProductCategory ppc
 ON ppc.ProductCategoryID = pc.ParentCategoryID;

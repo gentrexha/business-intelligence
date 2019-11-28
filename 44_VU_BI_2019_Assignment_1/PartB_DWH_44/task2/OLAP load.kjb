@@ -1,17 +1,17 @@
 <job>
-  <name>OLAP create</name>
+  <name>OLAP load</name>
   <description/>
   <extended_description/>
   <job_version/>
   <job_status>0</job_status>
-  <directory>/</directory>
+  <directory>/task2</directory>
   <created_user>-</created_user>
-  <created_date>2019/11/28 13:36:50.458</created_date>
+  <created_date>2019/11/28 15:16:02.570</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2019/11/28 15:10:09.731</modified_date>
+  <modified_date>2019/11/28 16:07:41.674</modified_date>
   <parameters>
     <parameter>
-      <name>TASK2</name>
+      <name>HOME</name>
       <default_value>C:\Users\z0043cyc\Google Drive\TU Wien\Semester 3 Projects\Business Intelligence\business-intelligence\44_VU_BI_2019_Assignment_1\PartB_DWH_44\task2</default_value>
       <description/>
     </parameter>
@@ -364,143 +364,143 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>128</xloc>
-      <yloc>208</yloc>
+      <xloc>80</xloc>
+      <yloc>192</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>DM_Location</name>
+      <name>Load DM_Customer</name>
       <description/>
       <type>SQL</type>
       <attributes/>
       <sql/>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${TASK2}\DM\DM_Location.sql</sqlfilename>
+      <sqlfilename>${HOME}\etl\Import_Customer.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>BI_OLAP_44</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>432</xloc>
-      <yloc>272</yloc>
+      <xloc>240</xloc>
+      <yloc>208</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>DM_Customer</name>
+      <name>Load DM_Time</name>
       <description/>
       <type>SQL</type>
       <attributes/>
       <sql/>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${TASK2}\DM\DM_Customer.sql</sqlfilename>
+      <sqlfilename>${HOME}\etl\Import_Time.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>BI_OLAP_44</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
-      <nr>1</nr>
-      <xloc>288</xloc>
+      <nr>0</nr>
+      <xloc>352</xloc>
       <yloc>224</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>DM_Product</name>
+      <name>Load DM_Location</name>
       <description/>
       <type>SQL</type>
       <attributes/>
       <sql/>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${TASK2}\DM\DM_Product.sql</sqlfilename>
+      <sqlfilename>${HOME}\etl\Import_Location.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>BI_OLAP_44</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
-      <nr>4</nr>
-      <xloc>640</xloc>
-      <yloc>368</yloc>
+      <nr>0</nr>
+      <xloc>608</xloc>
+      <yloc>224</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>DM_FactSales</name>
+      <name>Load DM_Product</name>
       <description/>
       <type>SQL</type>
       <attributes/>
       <sql/>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${TASK2}\DM\DM_FactSales.sql</sqlfilename>
+      <sqlfilename>${HOME}\etl\Import_Product.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>BI_OLAP_44</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
-      <nr>6</nr>
-      <xloc>736</xloc>
-      <yloc>416</yloc>
+      <nr>0</nr>
+      <xloc>464</xloc>
+      <yloc>240</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>DM_Time</name>
+      <name>Load DM_FactSales</name>
       <description/>
       <type>SQL</type>
       <attributes/>
       <sql/>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${TASK2}\DM\DM_Time.sql</sqlfilename>
+      <sqlfilename>${HOME}\etl\Import_FactSales.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>BI_OLAP_44</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
-      <nr>7</nr>
-      <xloc>544</xloc>
-      <yloc>320</yloc>
+      <nr>0</nr>
+      <xloc>768</xloc>
+      <yloc>224</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
   <hops>
     <hop>
       <from>Start</from>
-      <to>DM_Customer</to>
+      <to>Load DM_Customer</to>
       <from_nr>0</from_nr>
-      <to_nr>1</to_nr>
+      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>DM_Customer</from>
-      <to>DM_Location</to>
-      <from_nr>1</from_nr>
+      <from>Load DM_Customer</from>
+      <to>Load DM_Time</to>
+      <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>DM_Location</from>
-      <to>DM_Time</to>
+      <from>Load DM_Time</from>
+      <to>Load DM_Product</to>
       <from_nr>0</from_nr>
-      <to_nr>7</to_nr>
+      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>DM_Time</from>
-      <to>DM_Product</to>
-      <from_nr>7</from_nr>
-      <to_nr>4</to_nr>
+      <from>Load DM_Product</from>
+      <to>Load DM_Location</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>DM_Product</from>
-      <to>DM_FactSales</to>
-      <from_nr>4</from_nr>
-      <to_nr>6</to_nr>
+      <from>Load DM_Location</from>
+      <to>Load DM_FactSales</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>

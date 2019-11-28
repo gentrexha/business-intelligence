@@ -5,4 +5,5 @@ EXTRACT(MONTH FROM `Date`) as MonthNumberofYear,
 EXTRACT(YEAR FROM `Date`) as CalendarYear
 FROM (SELECT SellStartDate as `Date` FROM BI_OLTP_44.TB_Product
 UNION SELECT SellEndDate FROM BI_OLTP_44.TB_Product
-UNION SELECT DiscontinuedDate FROM BI_OLTP_44.TB_Product) as tmp;
+UNION SELECT DiscontinuedDate FROM BI_OLTP_44.TB_Product) as tmp
+WHERE `Date` IS NOT NULL;

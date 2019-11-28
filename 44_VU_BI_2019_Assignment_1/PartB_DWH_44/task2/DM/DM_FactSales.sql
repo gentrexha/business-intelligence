@@ -1,6 +1,6 @@
 CREATE TABLE `DM_FactSales` (
-    `SalesOrderNumber` INT NOT NULL,
-    `SalesOrderLineNumber` INT NOT NULL,
+    `SalesOrderNumber` VARCHAR(100) NOT NULL,
+    `SalesOrderLineNumber` VARCHAR(100) NOT NULL,
     `CustomerID` INT,
     `ProductID` INT,
     `ShipToAddressID` INT,
@@ -9,7 +9,7 @@ CREATE TABLE `DM_FactSales` (
     `UnitPrice` DECIMAL,
     `Discount` DECIMAL,
     `OrderQuantity` INT,
-    `OrderLineTotal` DECIMAL AS (`OrderQuantity` * `UnitPrice` - `Discount`),
+    `OrderLineTotal` DECIMAL,
     `OrderLineProfit` DECIMAL,
     `TaxAmount` DECIMAL,
     `OrderLineFreightCost` DECIMAL,

@@ -1,4 +1,4 @@
-INSERT INTO BI_OLAP_44.DM_Time
+INSERT INTO BI_OLAP_44.DM_Location
 SELECT AddressID,
 PostalCode,
 City,
