@@ -18,12 +18,12 @@ CREATE TABLE `DM_FactSales` (
     `DueDate` Date,
     `ShipDate` Date,
     `IsLateShipment` INT,
-    CONSTRAINT PK_FactSales PRIMARY KEY (`SalesOrderNumber`, `SalesOrderLineNumber`)
-	CONSTRAINT FK_CustomerID_FactSales FOREIGN KEY (`CustomerID`) REFERENCES Customer(`CustomerID`),
-	CONSTRAINT FK_ProductID_FactSales FOREIGN KEY (`ProductID`) REFERENCES Product(`ProductID`),
-	CONSTRAINT FK_ShipToAddressID_FactSales FOREIGN KEY (`ShipToAddressID`) REFERENCES Location(`AddressID`),
-	CONSTRAINT FK_BillToAddressID_FactSales FOREIGN KEY (`BillToAddressID`) REFERENCES Location(`AddressID`),
-	CONSTRAINT FK_OrderDate_FactSales FOREIGN KEY (`OrderDate`) REFERENCES Time(`Date`),
-	CONSTRAINT FK_DueDate_FactSales FOREIGN KEY (`DueDate`) REFERENCES Time(`Date`),
-	CONSTRAINT FK_ShipDate_FactSales FOREIGN KEY (`ShipDate`) REFERENCES Time(`Date`)
+    CONSTRAINT PK_FactSales PRIMARY KEY (`SalesOrderNumber`, `SalesOrderLineNumber`),
+	CONSTRAINT FK_CustomerID_FactSales FOREIGN KEY (`CustomerID`) REFERENCES DM_Customer(`CustomerID`),
+	CONSTRAINT FK_ProductID_FactSales FOREIGN KEY (`ProductID`) REFERENCES DM_Product(`ProductID`),
+	CONSTRAINT FK_ShipToAddressID_FactSales FOREIGN KEY (`ShipToAddressID`) REFERENCES DM_Location(`AddressID`),
+	CONSTRAINT FK_BillToAddressID_FactSales FOREIGN KEY (`BillToAddressID`) REFERENCES DM_Location(`AddressID`),
+	CONSTRAINT FK_OrderDate_FactSales FOREIGN KEY (`OrderDate`) REFERENCES DM_Time(`Date`),
+	CONSTRAINT FK_DueDate_FactSales FOREIGN KEY (`DueDate`) REFERENCES DM_Time(`Date`),
+	CONSTRAINT FK_ShipDate_FactSales FOREIGN KEY (`ShipDate`) REFERENCES DM_Time(`Date`)
 );
