@@ -3,13 +3,19 @@
   <description/>
   <extended_description/>
   <job_version/>
+  <job_status>0</job_status>
   <directory>/</directory>
   <created_user>-</created_user>
   <created_date>2019/11/26 14:42:46.930</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2019/11/26 15:33:36.530</modified_date>
+  <modified_date>2019/11/28 11:17:49.800</modified_date>
   <parameters>
-    </parameters>
+    <parameter>
+      <name>DATAPATH</name>
+      <default_value>C:\Users\z0043cyc\Google Drive\TU Wien\Semester 3 Projects\Business Intelligence\business-intelligence\44_VU_BI_2019_Assignment_1\PartB_DWH_44\data</default_value>
+      <description/>
+    </parameter>
+  </parameters>
   <connection>
     <name>BI_OLTP_44</name>
     <server>localhost</server>
@@ -347,7 +353,7 @@
       <attributes/>
       <schemaname/>
       <tablename>TB_Customer</tablename>
-      <filename>C:\Users\z0043cyc\Google Drive\TU Wien\Semester 3 Projects\Business Intelligence\business-intelligence\44_VU_BI_2019_Assignment_1\PartB_DWH_44\data\OLTP_data\Customer.csv</filename>
+      <filename>${DATAPATH}\Customer.csv</filename>
       <separator>\t</separator>
       <enclosed/>
       <escaped/>
@@ -396,7 +402,7 @@
       <attributes/>
       <schemaname/>
       <tablename>TB_CustomerAddress</tablename>
-      <filename>C:\Users\z0043cyc\Google Drive\TU Wien\Semester 3 Projects\Business Intelligence\business-intelligence\44_VU_BI_2019_Assignment_1\PartB_DWH_44\data\OLTP_data\CustomerAddress.csv</filename>
+      <filename>${DATAPATH}\CustomerAddress.csv</filename>
       <separator>\t</separator>
       <enclosed/>
       <escaped/>
@@ -423,7 +429,7 @@
       <attributes/>
       <schemaname/>
       <tablename>TB_Product</tablename>
-      <filename>C:\Users\z0043cyc\Google Drive\TU Wien\Semester 3 Projects\Business Intelligence\business-intelligence\44_VU_BI_2019_Assignment_1\PartB_DWH_44\data\OLTP_data\Product.csv</filename>
+      <filename>${DATAPATH}\Product.csv</filename>
       <separator>\t</separator>
       <enclosed/>
       <escaped/>
@@ -450,7 +456,7 @@
       <attributes/>
       <schemaname/>
       <tablename>TB_ProductCategory</tablename>
-      <filename>C:\Users\z0043cyc\Google Drive\TU Wien\Semester 3 Projects\Business Intelligence\business-intelligence\44_VU_BI_2019_Assignment_1\PartB_DWH_44\data\OLTP_data\ProductCategory.csv</filename>
+      <filename>${DATAPATH}\ProductCategory.csv</filename>
       <separator>\t</separator>
       <enclosed/>
       <escaped/>
@@ -477,7 +483,7 @@
       <attributes/>
       <schemaname/>
       <tablename>TB_SalesOrderDetail</tablename>
-      <filename>C:\Users\z0043cyc\Google Drive\TU Wien\Semester 3 Projects\Business Intelligence\business-intelligence\44_VU_BI_2019_Assignment_1\PartB_DWH_44\data\OLTP_data\SalesOrderDetail.csv</filename>
+      <filename>${DATAPATH}\SalesOrderDetail.csv</filename>
       <separator>\t</separator>
       <enclosed/>
       <escaped/>
@@ -504,7 +510,7 @@
       <attributes/>
       <schemaname/>
       <tablename>TB_SalesOrderHeader</tablename>
-      <filename>C:\Users\z0043cyc\Google Drive\TU Wien\Semester 3 Projects\Business Intelligence\business-intelligence\44_VU_BI_2019_Assignment_1\PartB_DWH_44\data\OLTP_data\SalesOrderHeader.csv</filename>
+      <filename>${DATAPATH}\SalesOrderHeader.csv</filename>
       <separator>\t</separator>
       <enclosed/>
       <escaped/>
@@ -531,7 +537,7 @@
       <attributes/>
       <schemaname/>
       <tablename>TB_ShipMethod</tablename>
-      <filename>C:\Users\z0043cyc\Google Drive\TU Wien\Semester 3 Projects\Business Intelligence\business-intelligence\44_VU_BI_2019_Assignment_1\PartB_DWH_44\data\OLTP_data\ShipMethod.csv</filename>
+      <filename>${DATAPATH}\ShipMethod.csv</filename>
       <separator>\t</separator>
       <enclosed/>
       <escaped/>
@@ -558,7 +564,7 @@
       <attributes/>
       <schemaname/>
       <tablename>TB_Address</tablename>
-      <filename>C:\Users\z0043cyc\Google Drive\TU Wien\Semester 3 Projects\Business Intelligence\business-intelligence\44_VU_BI_2019_Assignment_1\PartB_DWH_44\data\OLTP_data\Address.csv</filename>
+      <filename>${DATAPATH}\Address.csv</filename>
       <separator>\t</separator>
       <enclosed/>
       <escaped/>
