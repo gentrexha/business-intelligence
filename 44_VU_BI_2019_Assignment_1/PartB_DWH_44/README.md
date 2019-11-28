@@ -45,7 +45,9 @@ and run it.
 ## Task 2
 
 ```sql
-CREATE DATABASE BI_OLAP_44;
+CREATE DATABASE BI_OLAP;
+GRANT ALL PRIVILEGES ON BI_OLAP.* TO 'admin'@'localhost';
+FLUSH PRIVILEGES;
 ```
 
 ## FAQ
