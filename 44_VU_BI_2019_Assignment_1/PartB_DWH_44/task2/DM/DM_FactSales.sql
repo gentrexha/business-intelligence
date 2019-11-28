@@ -9,7 +9,7 @@ CREATE TABLE `DM_FactSales` (
     `UnitPrice` DECIMAL,
     `Discount` DECIMAL,
     `OrderQuantity` INT,
-    `OrderLineTotal` DECIMAL,
+    `OrderLineTotal` DECIMAL AS (`OrderQuantity` * `UnitPrice` - `Discount`),
     `OrderLineProfit` DECIMAL,
     `TaxAmount` DECIMAL,
     `OrderLineFreightCost` DECIMAL,

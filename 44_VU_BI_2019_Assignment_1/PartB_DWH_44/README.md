@@ -48,8 +48,7 @@ and run it.
 CREATE DATABASE BI_OLAP_44;
 ```
 
-
-# FAQ
+## FAQ
 
 "For the Bulk Load Error try executing in mysql:
 
