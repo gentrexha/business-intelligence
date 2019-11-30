@@ -1,5 +1,4 @@
-SELECT [ShippedTo].[CountryRegion].Members ON COLUMNS,
-	[Measures].[Revenue] ON ROWS	
+SELECT [Measures].[Revenue] ON COLUMNS,
+ORDER([ShippedTo].[CountryRegion].MEMBERS, [Revenue], DESC) ON ROWS
 FROM bike_sales
 WHERE [OrderDate].[2014]
-// Sort by TopRegion is Missing

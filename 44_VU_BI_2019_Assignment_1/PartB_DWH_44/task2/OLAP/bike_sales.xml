@@ -74,19 +74,19 @@
     </DimensionUsage>
     <DimensionUsage source="Date" name="OrderDate" visible="true" foreignKey="OrderDate" highCardinality="false">
     </DimensionUsage>
-    <Measure name="Profit" column="OrderLineProfit" datatype="Integer" formatString="$" aggregator="sum" visible="true">
+    <Measure name="Profit" column="OrderLineProfit" formatString="#.00" aggregator="sum" visible="true">
     </Measure>
-    <Measure name="Revenue" column="OrderLineTotal" formatString="$" aggregator="sum" visible="true">
+    <Measure name="Revenue" column="OrderLineTotal" formatString="#.00" aggregator="sum" visible="true">
     </Measure>
-    <Measure name="Quantity" column="OrderQuantity" aggregator="sum" visible="true">
+    <Measure name="Quantity" column="OrderQuantity" aggregator="distinct-count" visible="true">
     </Measure>
-    <Measure name="Discount" column="Discount" formatString="%" aggregator="count" visible="true">
+    <Measure name="Discount" column="Discount" formatString="#.00" aggregator="sum" visible="true">
     </Measure>
-    <Measure name="FreightCost" column="OrderLineFreightCost" formatString="$" aggregator="distinct-count" visible="true">
+    <Measure name="FreightCost" column="OrderLineFreightCost" formatString="#.00" aggregator="sum" visible="true">
     </Measure>
-    <Measure name="TaxAmount" column="TaxAmount" formatString="$" aggregator="distinct-count" visible="true">
+    <Measure name="TaxAmount" column="TaxAmount" formatString="#.00" aggregator="sum" visible="true">
     </Measure>
-    <Measure name="IsLateShipment" column="IsLateShipment" aggregator="count" visible="true">
+    <Measure name="IsLateShipment" column="IsLateShipment" aggregator="max" visible="true">
     </Measure>
   </Cube>
 </Schema>

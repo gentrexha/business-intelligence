@@ -1,4 +1,9 @@
-SELECT {[OrderDate].[Month], [Measures].[TaxAmount]} ON COLUMNS,
-	{[OrderDate].[Month], [Measures].[TaxAmount]} ON ROWS
+SELECT [TaxAmount] ON COLUMNS,
+	{[OrderDate].[2014].[1], 
+	[OrderDate].[2014].[2], 
+	[OrderDate].[2014].[3], 
+	[OrderDate].[2014].[4], 
+	[OrderDate].[2014].[5], 
+	[OrderDate].[2014].[6], 
+	[OrderDate].[2014].[7]} ON ROWS
 FROM bike_sales
-WHERE [OrderDate].[Year].[2014]	
