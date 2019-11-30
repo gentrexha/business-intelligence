@@ -57,7 +57,7 @@ ALTER TABLE tmp ADD COLUMN OrderLineTotal DECIMAL GENERATED ALWAYS
 AS (`OrderQuantity` * `UnitPrice` - `Discount`) STORED;
 
 ALTER TABLE tmp ADD COLUMN TaxAmount DECIMAL GENERATED ALWAYS 
-AS (`Tax` * `OrderLineTotal`) STORED;
+AS (`Tax` / 100 * `OrderLineTotal`) STORED;
 
 ALTER TABLE tmp ADD COLUMN OrderLineProfit DECIMAL GENERATED ALWAYS 
 AS (`OrderLineTotal` - `OrderQuantity` * `StandardCost`) STORED;

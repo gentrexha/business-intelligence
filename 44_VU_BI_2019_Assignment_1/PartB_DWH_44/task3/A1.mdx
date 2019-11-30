@@ -1,0 +1,4 @@
+SELECT [Profit] ON COLUMNS, 
+ORDER([Product].[TopCategory].MEMBERS, [Profit], DESC) ON ROWS 
+FROM [bike_sales]
+WHERE [OrderDate].[Year].[2015]
