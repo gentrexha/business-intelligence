@@ -11,6 +11,6 @@ Each assignment has it's corresponding folder and all the relevant data should b
 * Wimmer Christoph 
 
 ## Tasks
-- [ ] Due 01.12.2019 23:55	Hands-on 1 (TUWEL upload)
+- [x] Due 01.12.2019 23:55	Hands-on 1 (TUWEL upload)
 - [ ] 13.01.2020 17:00 - 19:00	Written Exam
 - [ ] Due 19.01.2020 23:55	Hands-on 2 (TUWEL upload)
