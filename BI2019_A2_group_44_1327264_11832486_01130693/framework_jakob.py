@@ -9,13 +9,11 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler, Normalizer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 
-
 # %% Configuration options
 np.random.seed(0)
 
-root_path = Path().resolve() / 'BI2019_A2_group_44_1327264_11832486_01130693'
+root_path = Path(__file__).resolve().parents[0]
 data_path = root_path / 'data_jakob.csv'
-
 
 # %% Read the data
 full_df = pd.read_csv(
@@ -81,7 +79,6 @@ for classifier in classifiers:
     # Evaluate
     # TODO
 
-
 # %% Task B 4 b
 # Try different scaling methods
 
@@ -112,7 +109,6 @@ for classifier in classifiers:
         # TODO
         is_best_scaler = True  # TODO
 
-
 # %% Task B 4 c
 # Try different train/test splits
 
@@ -127,8 +123,8 @@ for pipe in best_pipelines:
         # Create the train/test sets
         train_x, test_x, train_y, test_y = train_test_split(
             full_x, full_y,
-            train_size = train_percentage / 100,
-            stratify = full_y
+            train_size=train_percentage / 100,
+            stratify=full_y
         )
 
         # Train the pipeline
@@ -136,7 +132,6 @@ for pipe in best_pipelines:
 
         # Evaluate
         # TODO
-
 
 # %% Task C 2
 # Create new datasets with some values being NaNs
@@ -149,12 +144,14 @@ low_gain_attr = full_df.columns[1]
 frac_nans_few = 0.02
 frac_nans_many = 0.2
 
+
 def insert_nans_attr(df, attr, frac):
     df = df.copy()
     mask = np.random.random(size=len(df)) <= frac
     attr_index = list(full_df.columns).index(attr)
     df[:, attr_index][mask] = np.nan
     return df
+
 
 def insert_nans(df, frac):
     df = df.copy()
@@ -163,18 +160,20 @@ def insert_nans(df, frac):
     return df
 
 
-x_low_gain_few   = insert_nans_attr(full_x, low_gain_attr,  frac_nans_few)
-x_low_gain_many  = insert_nans_attr(full_x, low_gain_attr,  frac_nans_many)
-x_high_gain_few  = insert_nans_attr(full_x, high_gain_attr, frac_nans_few)
+x_low_gain_few = insert_nans_attr(full_x, low_gain_attr, frac_nans_few)
+x_low_gain_many = insert_nans_attr(full_x, low_gain_attr, frac_nans_many)
+x_high_gain_few = insert_nans_attr(full_x, high_gain_attr, frac_nans_few)
 x_high_gain_many = insert_nans_attr(full_x, high_gain_attr, frac_nans_many)
 
-x_all_attrs_few  = insert_nans(full_x, frac_nans_few)
+x_all_attrs_few = insert_nans(full_x, frac_nans_few)
 x_all_attrs_many = insert_nans(full_x, frac_nans_many)
 
 
 # %% Task C 3 & 4
 # Imputation strategies
-# Some imputations cannot be implemented as transformers. These functions preprocess the dataset, then return (x, y, preprocess_transformer). The transformer may be `None`.
+# Some imputations cannot be implemented as transformers.
+# These functions preprocess the dataset, then return (x, y, preprocess_transformer).
+# The transformer may be `None`.
 def impute_drop_nans(x, y):
     mask = np.isnan(x)
     mask = np.any(mask, axis=1)
@@ -182,9 +181,11 @@ def impute_drop_nans(x, y):
 
     return x[mask, :], y[mask], None
 
+
 def impute_means(x, y):
     imputer = SimpleImputer()
     return x, y, imputer
+
 
 def impute_means_per_class(x, y):
     # TODO
@@ -196,7 +197,6 @@ impute_strategies = [
     impute_means,
     # impute_means_per_class
 ]
-
 
 for strategy in impute_strategies:
     # Run the strategy. This preprocesses the data and returns an imputer (or `None`)

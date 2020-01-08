@@ -26,6 +26,12 @@ Not needed.
 
 ### (4) Training & Testing
 
+#### a. Parameters
+
+#### b. Scaling
+
+#### c. Training / test set splits
+
 ## C
 
 ## D
