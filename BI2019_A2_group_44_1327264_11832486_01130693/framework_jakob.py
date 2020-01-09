@@ -188,14 +188,33 @@ def impute_means(x, y):
 
 
 def impute_means_per_class(x, y):
-    # TODO
-    raise NotImplementedError
+    # Find all classes in the dataset
+    classes = np.unique(y)
+
+    # Impute the values per class
+    batches_x = []
+    batches_y = []
+    for cls in classes:
+        mask = y == cls
+        batch_y = y[mask]
+        batch_x = x[mask, :]
+
+        imputer = SimpleImputer()
+        batch_x = imputer.fit_transform(batch_x)
+
+        batches_y.append(batch_y)
+        batches_x.append(batch_x)
+
+    # Combine the batches and return the result
+    x = np.concatenate(batches_x, axis=0)
+    y = np.concatenate(batches_y, axis=0)
+    return x, y, None
 
 
 impute_strategies = [
     impute_drop_nans,
     impute_means,
-    # impute_means_per_class
+    impute_means_per_class
 ]
 
 for strategy in impute_strategies:
@@ -211,5 +230,8 @@ for strategy in impute_strategies:
 
     # Evaluate
     # TODO
+
+# %%
+
 
 # %%
