@@ -32,6 +32,32 @@ Not needed.
 
 #### c. Training / test set splits
 
+### Questions
+
+Summarize the results while focusing on the following questions:
+
+a. What trends do you observe in each set of experiments?
+
+b. How easy was it to interpret the algorithm and its performance?
+
+c. Which classes are most frequently mixed-up? (and why?)
+
+d. What parameter settings cause performance changes?
+
+e. Do both algorithms (or two system environments, i.e. any pairing of
+Spark/MLlib vs WEKA vs Scikit-Learn, if you chose to work on one algorithm
+only) show the same behavior in performance, performance degradation /
+robustness against
+	i. smaller and larger training set sizes?
+	ii. variations in parameter settings?
+
+f. Did you observe or can you force and document characteristics such as over-
+learning?
+
+g. How does the performance change with different amounts of training data
+being available? What are the best scalings (per attribute / per vector) and
+why?
+
 ## C
 
 ## D

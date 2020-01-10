@@ -17,3 +17,4 @@ pathlib2
 pandas
 numpy
 sklearn
+sklearn-evaluation

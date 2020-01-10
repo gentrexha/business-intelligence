@@ -1,0 +1,9 @@
+classifier,scaling,mean_test_score
+SVC,StandardScaler,0.903183350559779
+SVC,MinMaxScaler,0.8727181399302569
+SVC,Normalizer,0.7830390348038601
+SVC,RobustScaler,0.8993003970132243
+RandomForestClassifier,StandardScaler,0.8916827661485854
+RandomForestClassifier,MinMaxScaler,0.8901285221641567
+RandomForestClassifier,Normalizer,0.8211177709301314
+RandomForestClassifier,RobustScaler,0.8926139601827613
