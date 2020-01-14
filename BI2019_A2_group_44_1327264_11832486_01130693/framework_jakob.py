@@ -73,17 +73,17 @@ param_grids = {
     },
 }
 
-# param_grids = {  # For development purposes
-#     "SVC": {
-#         'C':[1,10,100],
-#         'gamma':[1,0.1], 
-#         'kernel':['linear','rbf'],
-#     },
-#     "RandomForestClassifier" : {
-#         'n_estimators': [100, 200, 300],
-#         'criterion': ['gini', 'entropy'],      
-#     },
-# }
+param_grids = {  # For development purposes
+    "SVC": {
+        'C':[1,10,100],
+        'gamma':[1,0.1], 
+        'kernel':['linear','rbf'],
+    },
+    "RandomForestClassifier" : {
+        'n_estimators': [100, 200, 300],
+        'criterion': ['gini', 'entropy'],      
+    },
+}
 
 best_params = {}
 grid_scores = {}
@@ -219,7 +219,8 @@ df_scalers = pd.concat(
 df_scalers = df_scalers.reset_index()
 df_scalers["level_0"] = df_scalers["level_0"].apply(lambda x: str(x)[0:str(x).find("(")])
 df_scalers["level_1"] = df_scalers["level_1"].apply(lambda x: str(x)[0:str(x).find("(")])
-df_scalers.to_csv(root_path / "reports/scaling_selection.csv", index=False, header=["classifier","scaling", "mean_test_score"])
+df_scalers.to_csv(root_path / "reports/scaling_selection.csv", index=False, 
+    header=["classifier","scaling", "mean_test_score"])
 
 # Find best combination
 best_combination = {k:max(v, key=v.get) for k, v in best_scaler.items()}
@@ -228,12 +229,15 @@ best_combination = {k:max(v, key=v.get) for k, v in best_scaler.items()}
 # Try different train/test splits
 
 best_pipelines = []
+best_test_y_pred = {"RandomForestClassifier":None, "SVC": None}
+best_test_y = {"RandomForestClassifier":None, "SVC": None}
 for key, value in best_combination.items():
     best_pipelines.append(make_pipe(value,key).set_params(**best_params[type(key).__name__]))
 
 df = pd.DataFrame()
 
 for pipe in best_pipelines:
+    best_score = 0
     for train_percentage in range(5, 105, 10):
         # Create the train/test sets
         train_x, test_x, train_y, test_y = train_test_split(
@@ -251,6 +255,10 @@ for pipe in best_pipelines:
 
         # Evaluate
         report = classification_report(test_y, test_y_pred, output_dict=True)
+        if report["accuracy"] > best_score:    
+            best_score = report["accuracy"]
+            best_test_y_pred[type(pipe[1]).__name__] = test_y_pred
+            best_test_y[type(pipe[1]).__name__] = test_y
         df_report = pd.DataFrame(report).transpose()
         df_report["pipeline"] = "{}->{}".format(type(pipe[0]).__name__, type(pipe[1]).__name__)
         df_report["train_percentage"] = train_percentage
@@ -267,8 +275,40 @@ df.loc[df["index"] == "accuracy"].reset_index(drop=True)[
     header=["pipeline", "train_percentage", "accuracy"],
 )
 #%%
-# TODO
 # Do a confusion matrix for the best train_percentage split
+# RandomForestClassifier
+ax = plot.confusion_matrix(best_test_y["RandomForestClassifier"], best_test_y_pred["RandomForestClassifier"], 
+        target_names=[
+            "red soil",
+            "cotton crop",
+            "grey soil",
+            "damp grey soil",
+            "vegetation stubble soil",
+            "very damp grey soil"
+        ]
+    )
+fig = ax.get_figure()
+fig.set_figheight(15)
+fig.set_figwidth(15)
+fig.savefig(root_path / 'reports/figures/confusion_matrix_RandomForestClassifier.png')
+fig.clear()
+
+# SVC
+ax = plot.confusion_matrix(best_test_y["SVC"], best_test_y_pred["SVC"], 
+        target_names=[
+            "red soil",
+            "cotton crop",
+            "grey soil",
+            "damp grey soil",
+            "vegetation stubble soil",
+            "very damp grey soil"
+        ]
+    )
+fig = ax.get_figure()
+fig.set_figheight(15)
+fig.set_figwidth(15)
+fig.savefig(root_path / 'reports/figures/confusion_matrix_svc.png')
+fig.clear()
 # %% Task C 2
 # Create new datasets with some values being NaNs
 
