@@ -28,22 +28,32 @@ full_df = pd.read_csv(
     data_path,
 )
 
+full_df = full_df.astype(float)
+
 full_x = full_df.drop(columns='class').values
 full_y = full_df['class'].values.astype(int)
 
 
 # %% Pipeline creation function
-def make_pipe(scaler, classifier):
-    steps = [
+def make_pipe(scaler, classifier, imputer=None):
+    steps = []
+
+    if imputer is not None:
+        steps.append([
+            'imputer',
+            imputer
+        ])
+
+    steps.append(
         [
             'scaler',
             scaler
-        ],
-        [
-            'classifier',
-            classifier
-        ]
-    ]
+        ])
+
+    steps.append([
+        'classifier',
+        classifier
+    ])
 
     return Pipeline(steps)
 
@@ -59,7 +69,7 @@ classifiers = [
 param_grids = {
     "SVC": {
         'C':[1,10,100,1000],
-        'gamma':[1,0.1,0.001,0.0001], 
+        'gamma':[1,0.1,0.001,0.0001],
         'kernel':['linear','rbf']
     },
     "RandomForestClassifier": {
@@ -76,13 +86,12 @@ param_grids = {
 param_grids = {  # For development purposes
     "SVC": {
         'C':[1,10,100],
-        'gamma':[1,0.1], 
+        'gamma':[1,0.1],
         'kernel':['linear','rbf'],
     },
     "RandomForestClassifier" : {
-        'n_estimators': [100, 200, 300, 500, 1000],
-        'max_depth': [80, 90, 100, 110],
-        'criterion': ['gini', 'entropy'],      
+        'n_estimators': [100, 200, 300],
+        'criterion': ['gini', 'entropy'],
     },
 }
 
@@ -129,10 +138,10 @@ for classifier in classifiers:
 df.to_csv(root_path / "reports/classifier_selection.csv", index=False)
 #%% Evaluation
 # The selected hyperparameters for the RandomForestClassifier didn't prove themselves
-# useful, for atleast showing differences between iterations. There's very little 
+# useful, for atleast showing differences between iterations. There's very little
 # difference in performance between different parameter sets. Which is proven
 # by the variance calculation below.
-print("variance of 'mean_test_score' arr results : {}".format( 
+print("variance of 'mean_test_score' arr results : {}".format(
         np.var(grid_scores.get("RandomForestClassifier", "")["mean_test_score"])
     )
 )
@@ -222,17 +231,17 @@ for classifier in classifiers:
 
         # Train the pipeline
         gs.fit(full_x, full_y)
-        
+
         # Store result
         best_scaler[classifier].update(
             {scaler: gs.cv_results_["mean_test_score"]}
         )
-        
+
 # Save all the results in a table or something
 df_scalers = pd.concat(
     {
         k: pd.DataFrame.from_dict(v, 'index') for k, v in best_scaler.items()
-    }, 
+    },
     axis=0
 )
 
@@ -241,7 +250,7 @@ df_scalers = pd.concat(
 df_scalers = df_scalers.reset_index()
 df_scalers["level_0"] = df_scalers["level_0"].apply(lambda x: str(x)[0:str(x).find("(")])
 df_scalers["level_1"] = df_scalers["level_1"].apply(lambda x: str(x)[0:str(x).find("(")])
-df_scalers.to_csv(root_path / "reports/scaling_selection.csv", index=False, 
+df_scalers.to_csv(root_path / "reports/scaling_selection.csv", index=False,
     header=["classifier","scaling", "mean_test_score"])
 
 # Find best combination
@@ -277,7 +286,7 @@ for pipe in best_pipelines:
 
         # Evaluate
         report = classification_report(test_y, test_y_pred, output_dict=True)
-        if report["accuracy"] > best_score:    
+        if report["accuracy"] > best_score:
             best_score = report["accuracy"]
             best_test_y_pred[type(pipe[1]).__name__] = test_y_pred
             best_test_y[type(pipe[1]).__name__] = test_y
@@ -299,7 +308,7 @@ df.loc[df["index"] == "accuracy"].reset_index(drop=True)[
 #%%
 # Do a confusion matrix for the best train_percentage split
 # RandomForestClassifier
-ax = plot.confusion_matrix(best_test_y["RandomForestClassifier"], best_test_y_pred["RandomForestClassifier"], 
+ax = plot.confusion_matrix(best_test_y["RandomForestClassifier"], best_test_y_pred["RandomForestClassifier"],
         target_names=[
             "red soil",
             "cotton crop",
@@ -316,7 +325,7 @@ fig.savefig(root_path / 'reports/figures/confusion_matrix_RandomForestClassifier
 fig.clear()
 
 # SVC
-ax = plot.confusion_matrix(best_test_y["SVC"], best_test_y_pred["SVC"], 
+ax = plot.confusion_matrix(best_test_y["SVC"], best_test_y_pred["SVC"],
         target_names=[
             "red soil",
             "cotton crop",
@@ -331,13 +340,25 @@ fig.set_figheight(15)
 fig.set_figwidth(15)
 fig.savefig(root_path / 'reports/figures/confusion_matrix_svc.png')
 fig.clear()
+
 # %% Task C 2
 # Create new datasets with some values being NaNs
 
+# Find features with high/low information content
+def sort_features_by_importance_ascending():
+    rf = RandomForestClassifier()
+    rf.fit(full_x, full_y)
+
+    scores = rf.feature_importances_
+    assert len(scores) == full_x.shape[1]
+
+    sort_indices = np.argsort(scores)
+    return list(np.array(full_df[:-1].columns)[sort_indices])
+
 # Attributes with high/low information gain
 # TODO: Select proper ones. The current ones are just placeholders
-high_gain_attr = full_df.columns[0]
-low_gain_attr = full_df.columns[1]
+high_gain_attr = 'E11attr'
+low_gain_attr = 'E5attr'
 
 frac_nans_few = 0.02
 frac_nans_many = 0.2
@@ -365,6 +386,16 @@ x_high_gain_many = insert_nans_attr(full_x, high_gain_attr, frac_nans_many)
 
 x_all_attrs_few = insert_nans(full_x, frac_nans_few)
 x_all_attrs_many = insert_nans(full_x, frac_nans_many)
+
+
+nan_datasets = {
+    "x_low_gain_few": x_low_gain_few,
+    "x_low_gain_many": x_low_gain_many,
+    "x_high_gain_few": x_high_gain_few,
+    "x_high_gain_many": x_high_gain_many,
+    "x_all_attrs_few": x_all_attrs_few,
+    "x_all_attrs_many": x_all_attrs_many,
+}
 
 
 # %% Task C 3 & 4
@@ -415,21 +446,33 @@ impute_strategies = [
     impute_means_per_class
 ]
 
+impute_classifier = SVC(
+    C = 10,
+    gamma = 0.1,
+    kernel = 'rbf'
+)
+
+impute_scaler = MinMaxScaler()
+
 for strategy in impute_strategies:
-    # Run the strategy. This preprocesses the data and returns an imputer (or `None`)
-    x, y, imputer = strategy(full_x, full_y)
+    print(strategy.__name__)
+    for dset_name, dset_x in nan_datasets.items():
+        # Run the strategy. This preprocesses the data and returns an imputer (or `None`)
+        x, y, imputer = strategy(dset_x, full_y)
 
-    # Create the full pipeline
-    raise NotImplementedError  # TODO
-    pipe = ...
+        # Create the full pipeline
+        pipe = make_pipe(
+            impute_scaler,
+            impute_classifier,
+            imputer,
+        )
 
-    # Train the pipeline
-    pipe.fit(x, y)
+        # Train the pipeline
+        pipe.fit(x, y)
 
-    # Evaluate
-    # TODO
-
-# %%
+        # Evaluate
+        print('   ', dset_name)
+        # TODO
 
 
 # %%
