@@ -80,7 +80,8 @@ param_grids = {  # For development purposes
         'kernel':['linear','rbf'],
     },
     "RandomForestClassifier" : {
-        'n_estimators': [100, 200, 300],
+        'n_estimators': [100, 200, 300, 500, 1000],
+        'max_depth': [80, 90, 100, 110],
         'criterion': ['gini', 'entropy'],      
     },
 }
@@ -134,7 +135,28 @@ df.to_csv(root_path / "reports/classifier_selection.csv", index=False)
 print("variance of 'mean_test_score' arr results : {}".format( 
         np.var(grid_scores.get("RandomForestClassifier", "")["mean_test_score"])
     )
-) 
+)
+# criterion: gini
+ax = plot.grid_search(grid_scores.get("RandomForestClassifier", ""), change=('classifier__max_depth', 'classifier__n_estimators'),
+    subset={'classifier__criterion': "gini"})
+fig = ax.get_figure()
+fig.savefig(root_path / 'reports/figures/rf__gini.png')
+fig.clear()
+
+# criterion: entropy
+ax = plot.grid_search(grid_scores.get("RandomForestClassifier", ""), change=('classifier__max_depth', 'classifier__n_estimators'),
+    subset={'classifier__criterion': "entropy"})
+fig = ax.get_figure()
+fig.savefig(root_path / 'reports/figures/rf__entropy.png')
+fig.clear()
+
+# differences between kernels
+ax = plot.grid_search(grid_scores.get("RandomForestClassifier", ""), change='classifier__criterion', kind='bar')
+fig = ax.get_figure()
+fig.set_figheight(7)
+fig.set_figwidth(15)
+fig.savefig(root_path / 'reports/figures/rf__criterion_difference.png')
+fig.clear()
 
 #%% Visualizations
 # kernel: linear
